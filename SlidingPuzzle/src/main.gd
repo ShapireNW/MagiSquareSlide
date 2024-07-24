@@ -35,9 +35,6 @@ func start_game():
 	var texture = ImageTexture.create_from_image(image)
 	var greyimage = Image.load_from_file("res://img/greytile.png")
 	var greytexture = ImageTexture.create_from_image(greyimage)
-	$FullImage.texture = texture
-	$FullImage.position.x = areaposx
-	$FullImage.position.y = areaposy/2
 	
 	for j in range(0,4):
 		for i in range(0,4):
@@ -64,7 +61,7 @@ func start_game():
 func shuffle_tiles():
 	offset = tile_h + 2
 	t = 0
-	while t < 30:
+	while t < 31:
 		var atile = randi() % 16
 		if tiles[atile].tilename != "Tile16" and tiles[atile].tilename != previous:
 			var rows = int(tiles[atile].position.y / offset)
@@ -81,8 +78,8 @@ func _process(delta):
 		var rows = int(mouse_copy.position.y / offset)
 		var cols = int(mouse_copy.position.x / offset)
 		check_neighbours(rows,cols)
-		if tiles == solved and movecounter > 1:
-			print("You win in ")
+		if tiles == solved:
+			print("You win")
 			$FullImage.show()
 			
 
